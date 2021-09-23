@@ -3,6 +3,7 @@ extends KinematicBody
 
 onready var head := $Head
 onready var headbob_animation := $Head/Camera/HeadBobPlayer
+onready var coyote_timer := $CoyoteTimer
 
 export var mouse_sensitivity := 0.5
 export var head_max_pitch := 90.0
@@ -22,7 +23,7 @@ var v_velocity := Vector3()
 var movement := Vector3()
 var snap_vec := Vector3.DOWN
 var jump := false
-var floor_height := 0
+var can_jump := false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -62,25 +63,24 @@ func _physics_process(delta: float) -> void:
 	else:
 		var time := time_to_halt if is_on_floor() else time_to_halt_air
 		var h_acceleration := max_horizontal_speed / time
-		h_speed = max(h_speed - h_acceleration * delta, 0)
+		h_speed = max(h_speed - h_acceleration * delta, 0)	
+	
+	if is_on_floor():
+		can_jump = true
+	elif coyote_timer.is_stopped():
+		coyote_timer.start()
 	
 	if is_on_ceiling():
 		v_velocity = Vector3.ZERO
-	elif is_on_floor() and jump:
+	elif can_jump and jump:
 		var jump_speed = 2 * jump_height * max_horizontal_speed / distance_to_peak
 		v_velocity = Vector3.UP * jump_speed
 	elif is_on_floor():
 		v_velocity = -get_floor_normal() * 0.1
-		jump = false
-		floor_height = transform.origin.y
 	else:
 		var section_distance = distance_to_peak if v_velocity.y > 0.0 else distance_after_peak
 		var gravity = 2 * jump_height * pow(max_horizontal_speed, 2) / pow(section_distance, 2)
-		var was_going_up = v_velocity.y > 0.0
 		v_velocity += Vector3.DOWN * gravity * delta
-		var going_down = v_velocity.y < 0.0
-		if was_going_up and going_down:
-			print(transform.origin.y - floor_height)
 		
 	h_velocity = direction * h_speed
 	movement.z = h_velocity.z + v_velocity.z
@@ -88,3 +88,6 @@ func _physics_process(delta: float) -> void:
 	movement.y = max(v_velocity.y, -max_falling_speed)
 	move_and_slide(movement, Vector3.UP)
 
+
+func _on_CoyoteTimer_timeout() -> void:
+	can_jump = is_on_floor()

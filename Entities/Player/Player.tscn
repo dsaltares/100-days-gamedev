@@ -68,3 +68,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6025, 0 )
 [node name="HeadBobPlayer" type="AnimationPlayer" parent="Head/Camera"]
 anims/idle = SubResource( 4 )
 anims/move = SubResource( 5 )
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_CoyoteTimer_timeout"]

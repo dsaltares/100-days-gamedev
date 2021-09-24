@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'game/**'
+      - '.github/workflows/**'
+
+jobs:
+  export_game:
+    runs-on: ubuntu-latest
+    name: Export game
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2.0.0
+    - name: export
+      uses: firebelley/godot-export@v2.8.1
+      with:
+        base_version: 0.0.1
+        godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.3.3/Godot_v3.3.3-stable_linux_headless.64.zip
+        godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.3.3/Godot_v3.3.3-stable_export_templates.tpz
+        relative_project_path: ./game
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

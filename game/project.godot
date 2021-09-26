@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "CharacterMover",
+"language": "GDScript",
+"path": "res://Entities/Player/CharacterMover.gd"
+}, {
 "base": "ColorRect",
 "class": "ColorTile",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://addons/color-palette/PaletteImporter.gd"
 } ]
 _global_script_class_icons={
+"CharacterMover": "",
 "ColorTile": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
 "Palette": "",

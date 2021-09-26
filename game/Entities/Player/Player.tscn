@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Entities/CharacterMover.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -61,7 +62,7 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="Head" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6025, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
 
@@ -69,8 +70,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6025, 0 )
 anims/idle = SubResource( 4 )
 anims/move = SubResource( 5 )
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
-
-[connection signal="timeout" from="CoyoteTimer" to="." method="_on_CoyoteTimer_timeout"]
+[node name="CharacterMover" parent="." instance=ExtResource( 2 )]

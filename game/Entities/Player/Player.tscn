@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/CharacterMover.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/WeaponManager.gd" type="Script" id=3]
+[ext_resource path="res://Entities/Weapons/Weapon.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -69,5 +71,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 [node name="HeadBobPlayer" type="AnimationPlayer" parent="Head/Camera"]
 anims/idle = SubResource( 4 )
 anims/move = SubResource( 5 )
+
+[node name="FirePoint" type="Position3D" parent="Head/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.690771 )
+
+[node name="WeaponManager" type="Spatial" parent="Head/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.377766, -0.172956, -0.729686 )
+script = ExtResource( 3 )
+fire_point_path = NodePath("../FirePoint")
+
+[node name="Weapons" type="Spatial" parent="Head/Camera/WeaponManager"]
+
+[node name="Pistol" parent="Head/Camera/WeaponManager/Weapons" instance=ExtResource( 4 )]
 
 [node name="CharacterMover" parent="." instance=ExtResource( 2 )]

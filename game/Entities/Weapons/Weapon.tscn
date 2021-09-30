@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Entities/Weapons/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Weapons/WeaponData.gd" type="Script" id=2]
+[ext_resource path="res://Entities/Weapons/Emitters/HitScanBulletEmitter.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Resource" id=1]
+resource_local_to_scene = true
+script = ExtResource( 2 )
+BulletEmitter = ExtResource( 3 )
+automatic = false
+max_ammo = 16
+attack_rate = 0.2
+collision_mask = 1
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 1, 1, 1 )
+
+[node name="Weapon" type="Spatial"]
+script = ExtResource( 1 )
+weapon_data = SubResource( 1 )
+
+[node name="Graphics" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Graphics"]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.3, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Graphics"]
+transform = Transform( 0.05, 0, 0, 0, 0.00868241, -0.196962, 0, 0.0492404, 0.0347296, 0, -0.104386, 0.115842 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="Graphics"]
+transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.000292957, -0.156348 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

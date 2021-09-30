@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "BulletEmitter",
+"language": "GDScript",
+"path": "res://Entities/Weapons/Emitters/BulletEmitter.gd"
+}, {
+"base": "Spatial",
+"class": "BulletHitEffect",
+"language": "GDScript",
+"path": "res://Entities/Weapons/Effects/BulletHitEffect.gd"
+}, {
 "base": "Node",
 "class": "CharacterMover",
 "language": "GDScript",
@@ -24,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/color-palette/utilities/FlexGridContainer.gd"
 }, {
+"base": "BulletEmitter",
+"class": "HitScanBulletEmitter",
+"language": "GDScript",
+"path": "res://Entities/Weapons/Emitters/HitScanBulletEmitter.gd"
+}, {
 "base": "Reference",
 "class": "Palette",
 "language": "GDScript",
@@ -33,13 +48,34 @@ _global_script_classes=[ {
 "class": "PaletteImporter",
 "language": "GDScript",
 "path": "res://addons/color-palette/PaletteImporter.gd"
+}, {
+"base": "Spatial",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Entities/Weapons/Weapon.gd"
+}, {
+"base": "Resource",
+"class": "WeaponData",
+"language": "GDScript",
+"path": "res://Entities/Weapons/WeaponData.gd"
+}, {
+"base": "Spatial",
+"class": "WeaponManager",
+"language": "GDScript",
+"path": "res://Entities/WeaponManager.gd"
 } ]
 _global_script_class_icons={
+"BulletEmitter": "",
+"BulletHitEffect": "",
 "CharacterMover": "",
 "ColorTile": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
+"HitScanBulletEmitter": "",
 "Palette": "",
-"PaletteImporter": ""
+"PaletteImporter": "",
+"Weapon": "",
+"WeaponData": "",
+"WeaponManager": ""
 }
 
 [application]

@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/Weapons/Emitters/HitScanBulletEmitter.gd"
 }, {
+"base": "Spatial",
+"class": "MuzzleFlash",
+"language": "GDScript",
+"path": "res://Entities/Weapons/MuzzleFlash.gd"
+}, {
 "base": "Reference",
 "class": "Palette",
 "language": "GDScript",
@@ -54,11 +59,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/Weapons/Weapon.gd"
 }, {
-"base": "Resource",
-"class": "WeaponData",
-"language": "GDScript",
-"path": "res://Entities/Weapons/WeaponData.gd"
-}, {
 "base": "Spatial",
 "class": "WeaponManager",
 "language": "GDScript",
@@ -71,10 +71,10 @@ _global_script_class_icons={
 "ColorTile": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
 "HitScanBulletEmitter": "",
+"MuzzleFlash": "",
 "Palette": "",
 "PaletteImporter": "",
 "Weapon": "",
-"WeaponData": "",
 "WeaponManager": ""
 }
 

@@ -1,40 +1,34 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Entities/Weapons/Weapon.gd" type="Script" id=1]
-[ext_resource path="res://Entities/Weapons/WeaponData.gd" type="Script" id=2]
-[ext_resource path="res://Entities/Weapons/Emitters/HitScanBulletEmitter.tscn" type="PackedScene" id=3]
-
-[sub_resource type="Resource" id=1]
-resource_local_to_scene = true
-script = ExtResource( 2 )
-BulletEmitter = ExtResource( 3 )
-automatic = false
-max_ammo = 16
-attack_rate = 0.2
-collision_mask = 1
-
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 1, 1, 1 )
+[ext_resource path="res://Entities/Weapons/Crosshairs/crosshair065.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Weapons/MuzzleFlash.gd" type="Script" id=4]
 
 [node name="Weapon" type="Spatial"]
 script = ExtResource( 1 )
-weapon_data = SubResource( 1 )
+automatic = true
+max_ammo = 16
 
 [node name="Graphics" type="Spatial" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Graphics"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.3, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="MeshContainer" type="Spatial" parent="Graphics"]
 
-[node name="MeshInstance2" type="MeshInstance" parent="Graphics"]
-transform = Transform( 0.05, 0, 0, 0, 0.00868241, -0.196962, 0, 0.0492404, 0.0347296, 0, -0.104386, 0.115842 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="MeshInstance3" type="MeshInstance" parent="Graphics"]
-transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.000292957, -0.156348 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="MuzzleFlash" type="Spatial" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16599 )
+script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Crosshair" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -36.0
+margin_right = 36.0
+margin_bottom = 36.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

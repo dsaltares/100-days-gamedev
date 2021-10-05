@@ -50,6 +50,14 @@ func attack(fire_point: Position3D, attack_just_pressed: bool) -> void:
 		animation_player.stop()
 		animation_player.play("attack")
 
+func set_active():
+	show()
+	$Crosshair.show()
+
+func set_inactive():
+	hide()
+	$Crosshair.hide()
+
 func _get_emitter() -> BulletEmitter:
 	for child in get_children():
 		if child is BulletEmitter:

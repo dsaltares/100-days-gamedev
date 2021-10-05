@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Entities/Weapons/Rocket.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Weapons/rocket_launch.wav" type="AudioStream" id=2]
+
+[sub_resource type="SphereShape" id=3]
+radius = 3.0
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.282353, 0.290196, 0.466667, 1 )
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.05
+height = 0.25
+
+[node name="Rocket" type="KinematicBody"]
+script = ExtResource( 1 )
+explosion_shape = SubResource( 3 )
+
+[node name="Graphics" type="CSGCombiner" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+material_override = SubResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.118607 )
+radius = 0.05
+height = 0.15
+cone = true
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0289417 )
+radius = 0.05
+height = 0.15
+
+[node name="CSGCylinder3" type="CSGCylinder" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0840714 )
+radius = 0.05
+height = 0.15
+cone = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="LaunchSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true

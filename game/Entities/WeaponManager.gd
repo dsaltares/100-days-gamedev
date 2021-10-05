@@ -3,7 +3,7 @@ extends Spatial
 class_name WeaponManager
 
 export (NodePath) var fire_point_path
-export var sway := 30.0
+export var sway := 100.0
 
 onready var weapon_container := $Weapons
 onready var hand_pos := $HandPos

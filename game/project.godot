@@ -59,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entities/Weapons/Emitters/PelletBulletEmitter.gd"
 }, {
+"base": "BulletEmitter",
+"class": "ProjectileBulletEmitter",
+"language": "GDScript",
+"path": "res://ProjectileBulletEmitter.gd"
+}, {
+"base": "KinematicBody",
+"class": "Rocket",
+"language": "GDScript",
+"path": "res://Entities/Weapons/Rocket.gd"
+}, {
 "base": "Spatial",
 "class": "Weapon",
 "language": "GDScript",
@@ -80,6 +90,8 @@ _global_script_class_icons={
 "Palette": "",
 "PaletteImporter": "",
 "PelletBulletEmitter": "",
+"ProjectileBulletEmitter": "",
+"Rocket": "",
 "Weapon": "",
 "WeaponManager": ""
 }

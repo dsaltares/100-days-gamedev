@@ -5,6 +5,7 @@ class_name PelletBulletEmitter
 export var num_pellets := 5
 export var min_spread_angle := 2.5
 export var max_spread_angle := 5.0
+export var damage := 1
 
 var HitScanBulletEmitter = preload("res://Entities/Weapons/Emitters/HitScanBulletEmitter.tscn")
 var hit_scan_emitter : BulletEmitter

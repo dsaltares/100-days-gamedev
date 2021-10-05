@@ -2,12 +2,13 @@ extends BulletEmitter
 class_name HitScanBulletEmitter
 
 export var distance := 1000
+export var damage := 1
 export var rigid_body_hit_strength := 1.5
 
 var HitEffect := preload("res://Entities/Weapons/Effects/BulletHitEffect.tscn")
 
 func attack(fire_point: Position3D, collision_mask: int) -> void:
-	var space_state = get_world().get_direct_space_state()
+	var space_state := get_world().get_direct_space_state()
 	var pos := fire_point.global_transform.origin
 	var result = space_state.intersect_ray(
 		pos,

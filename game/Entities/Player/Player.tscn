@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/CharacterMover.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entities/WeaponManager.gd" type="Script" id=3]
 [ext_resource path="res://Entities/Weapons/Pistol.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/Weapons/Shotgun.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -83,5 +84,9 @@ fire_point_path = NodePath("../FirePoint")
 [node name="Weapons" type="Spatial" parent="Head/Camera/WeaponManager"]
 
 [node name="Pistol" parent="Head/Camera/WeaponManager/Weapons" instance=ExtResource( 4 )]
+
+[node name="Shotgun" parent="Head/Camera/WeaponManager/Weapons" instance=ExtResource( 5 )]
+
+[node name="HandPos" type="Position3D" parent="Head/Camera/WeaponManager"]
 
 [node name="CharacterMover" parent="." instance=ExtResource( 2 )]

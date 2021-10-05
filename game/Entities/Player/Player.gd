@@ -11,10 +11,12 @@ export var head_max_pitch := 90.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), 0.1)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		var new_mode := Input.MOUSE_MODE_VISIBLE if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
+		Input.set_mouse_mode(new_mode)
 
 	var direction := Vector3.ZERO
 	direction -= transform.basis.z * Input.get_action_strength("move_forwards")
@@ -43,3 +45,9 @@ func _input(event: InputEvent) -> void:
 		rotation_degrees.y -= mouse_sensitivity * event.relative.x
 		head.rotation_degrees.x -= mouse_sensitivity * event.relative.y
 		head.rotation_degrees.x = clamp(head.rotation_degrees.x, -head_max_pitch, head_max_pitch)
+
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			weapon_manager.switch_to_next_weapon()
+		if event.button_index == BUTTON_WHEEL_UP:
+			weapon_manager.switch_to_prev_weapon()

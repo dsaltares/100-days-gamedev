@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/CharacterMover.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entities/WeaponManager.gd" type="Script" id=3]
 [ext_resource path="res://Entities/Weapons/Pistol.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entities/Weapons/Shotgun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entities/Player/WeaponCamera.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -68,6 +69,7 @@ material/0 = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
+cull_mask = 1048573
 
 [node name="HeadBobPlayer" type="AnimationPlayer" parent="Head/Camera"]
 anims/idle = SubResource( 4 )
@@ -88,5 +90,25 @@ fire_point_path = NodePath("../FirePoint")
 [node name="Shotgun" parent="Head/Camera/WeaponManager/Weapons" instance=ExtResource( 5 )]
 
 [node name="HandPos" type="Position3D" parent="Head/Camera/WeaponManager"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Head/Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Head/Camera/ViewportContainer"]
+size = Vector2( 1280, 720 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="WeaponCamera" type="Camera" parent="Head/Camera/ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+cull_mask = 2
+script = ExtResource( 6 )
+main_camera_path = NodePath("../../..")
 
 [node name="CharacterMover" parent="." instance=ExtResource( 2 )]

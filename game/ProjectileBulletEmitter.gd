@@ -2,7 +2,7 @@ extends BulletEmitter
 class_name ProjectileBulletEmitter
 
 export (PackedScene) var Projectile = null
-export var damage := 1
+export var damage := 1.0
 
 func attack(fire_point: Position3D, collision_mask: int):
 	var projectile = Projectile.instance()

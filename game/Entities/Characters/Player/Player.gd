@@ -11,7 +11,6 @@ export var head_max_pitch := 90.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), 0.1)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -51,3 +50,7 @@ func _input(event: InputEvent) -> void:
 			weapon_manager.switch_to_next_weapon()
 		if event.button_index == BUTTON_WHEEL_UP:
 			weapon_manager.switch_to_prev_weapon()
+
+
+func _on_Health_died() -> void:
+	get_tree().reload_current_scene()

@@ -2,7 +2,7 @@ extends BulletEmitter
 class_name HitScanBulletEmitter
 
 export var distance := 1000
-export var damage := 1
+export var damage := 1.0
 export var rigid_body_hit_strength := 1.5
 
 var HitEffect := preload("res://Entities/Weapons/Effects/BulletHitEffect.tscn")

@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "MuzzleFlash",
 "language": "GDScript",
-"path": "res://Entities/Weapons/MuzzleFlash.gd"
+"path": "res://Entities/Weapons/Effects/MuzzleFlash.gd"
 }, {
 "base": "Reference",
 "class": "Palette",
@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "KinematicBody",
 "class": "Rocket",
 "language": "GDScript",
-"path": "res://Entities/Weapons/Rocket.gd"
+"path": "res://Entities/Weapons/RocketLauncher/Rocket.gd"
 }, {
 "base": "Spatial",
 "class": "Weapon",

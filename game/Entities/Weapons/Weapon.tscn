@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Entities/Weapons/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Weapons/Crosshairs/crosshair065.png" type="Texture" id=2]
-[ext_resource path="res://Entities/Weapons/MuzzleFlash.gd" type="Script" id=4]
+[ext_resource path="res://Entities/Weapons/Effects/MuzzleFlash.gd" type="Script" id=4]
 
 [node name="Weapon" type="Spatial"]
 script = ExtResource( 1 )

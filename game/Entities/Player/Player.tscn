@@ -3,9 +3,9 @@
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/CharacterMover.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entities/WeaponManager.gd" type="Script" id=3]
-[ext_resource path="res://Entities/Weapons/Pistol.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entities/Weapons/Shotgun.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Entities/Weapons/RocketLauncher.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/Weapons/Pistol/Pistol.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/Weapons/Shotgun/Shotgun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entities/Weapons/RocketLauncher/RocketLauncher.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5

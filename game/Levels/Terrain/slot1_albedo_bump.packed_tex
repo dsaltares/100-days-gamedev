@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 1024,
+	"src": {
+		"a": "res://Levels/Terrain/raw/Rock028_1K_Displacement.png",
+		"rgb": "res://Levels/Terrain/raw/Rock028_1K_Color.png"
+	}
+}

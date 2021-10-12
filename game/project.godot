@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/color-palette/utilities/FlexGridContainer.gd"
 }, {
+"base": "ResourceFormatLoader",
+"class": "HTerrainDataLoader",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
+}, {
+"base": "ResourceFormatSaver",
+"class": "HTerrainDataSaver",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
+}, {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
@@ -111,6 +121,8 @@ _global_script_class_icons={
 "ColorTile": "",
 "Enemy": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
+"HTerrainDataLoader": "",
+"HTerrainDataSaver": "",
 "Health": "",
 "HitScanBulletEmitter": "",
 "MuzzleFlash": "",
@@ -146,7 +158,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/color-palette/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/color-palette/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [importer_defaults]
 

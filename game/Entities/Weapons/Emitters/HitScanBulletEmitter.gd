@@ -10,7 +10,7 @@ var HitEffect := preload("res://Entities/Weapons/Effects/BulletHitEffect.tscn")
 func attack(fire_point: Position3D, collision_mask: int) -> void:
 	var space_state := get_world().get_direct_space_state()
 	var pos := fire_point.global_transform.origin
-	var result = space_state.intersect_ray(
+	var result := space_state.intersect_ray(
 		pos,
 		pos - global_transform.basis.z * distance, 
 		[], 
@@ -23,7 +23,9 @@ func attack(fire_point: Position3D, collision_mask: int) -> void:
 		result.collider.hurt(damage, result.normal)
 	elif result:
 		var hit_effect = HitEffect.instance()
+			
 		result.collider.add_child(hit_effect)
+		
 		hit_effect.global_transform.origin = result.position
 		
 		if result.normal.angle_to(Vector3.UP) < 0.00005:
@@ -37,6 +39,7 @@ func attack(fire_point: Position3D, collision_mask: int) -> void:
 		var z = x.cross(y)
 		
 		hit_effect.global_transform.basis = Basis(x, y, z)
+		hit_effect.scale = Vector3(1, 1, 1)
 		
 		if result.collider is RigidBody:
 			var body : RigidBody = result.collider

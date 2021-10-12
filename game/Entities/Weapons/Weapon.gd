@@ -5,7 +5,7 @@ class_name Weapon
 export var automatic := false
 export var max_ammo := 1
 export var attack_rate := 0.2
-export (int, LAYERS_3D_PHYSICS) var collision_mask := 1
+export (int, LAYERS_3D_PHYSICS) var collision_mask := 1 + 2
 
 var can_attack := true
 var attack_timer := Timer.new()

@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Entities/Characters/Health.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/Characters/CharacterMover.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entities/Characters/Enemy/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://Entities/Characters/Vision.gd" type="Script" id=4]
+[ext_resource path="res://Entities/Characters/PathFollower.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -12,7 +14,7 @@ height = 0.9
 radius = 0.5
 mid_height = 0.9
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.658824, 0.517647, 0.952941, 1 )
 
 [sub_resource type="CubeMesh" id=4]
@@ -21,7 +23,7 @@ size = Vector3( 0.5, 0.1, 0.5 )
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.568627, 0.858824, 0.411765, 1 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "hurt"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/Body:material/0:albedo_color")
@@ -36,7 +38,11 @@ tracks/0/keys = {
 "values": [ Color( 0.658824, 0.517647, 0.952941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.658824, 0.517647, 0.952941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.658824, 0.517647, 0.952941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.658824, 0.517647, 0.952941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.658824, 0.517647, 0.952941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.658824, 0.517647, 0.952941, 1 ) ]
 }
 
-[node name="Enemy" type="KinematicBody"]
+[node name="Enemy" type="KinematicBody" groups=[
+"enemies",
+]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -48,7 +54,7 @@ shape = SubResource( 1 )
 [node name="Body" type="MeshInstance" parent="Graphics"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
 mesh = SubResource( 2 )
-material/0 = SubResource( 8 )
+material/0 = SubResource( 3 )
 
 [node name="Nose" type="MeshInstance" parent="Graphics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44255, -0.342106 )
@@ -59,9 +65,19 @@ material/0 = SubResource( 5 )
 health = 5.0
 
 [node name="CharacterMover" parent="." instance=ExtResource( 2 )]
+max_horizontal_speed = 1.0
 
 [node name="HealthAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hurt = SubResource( 7 )
+anims/hurt = SubResource( 6 )
+
+[node name="Vision" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44367, 0 )
+script = ExtResource( 4 )
+groups = [ "player" ]
+
+[node name="PathFollower" parent="." instance=ExtResource( 5 )]
 
 [connection signal="died" from="Health" to="." method="queue_free"]
 [connection signal="health_changed" from="Health" to="." method="_on_Health_health_changed"]
+[connection signal="lost" from="Vision" to="." method="_on_Vision_lost"]
+[connection signal="seen" from="Vision" to="." method="_on_Vision_seen"]

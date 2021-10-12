@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Entities/Characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/Materials/orange_grid.tres" type="Material" id=2]
@@ -17,6 +17,10 @@ ambient_light_color = Color( 0.309804, 0.329412, 0.419608, 1 )
 ambient_light_energy = 0.5
 ambient_light_sky_contribution = 0.3
 tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id=5]
+vertices = PoolVector3Array( 0.200001, 1.05, -0.4, 3.8, 1.45, -0.4, 3.8, 1.45, -4.6, 0.200001, 1.05, -4.6, 0.200001, 1.05, -4.6, 0.200001, 0.25, -5.8, -0.0999994, 0.25, -8.8, 0.1, 0.25, -6, -8.8, 0.25, 0.200001, 0.200001, 1.05, 0.200001, 0.200001, 1.05, -0.4, -0.0999994, 0.25, -8.8, -8.8, 0.25, -8.8, 0.0800009, 1.05, -3.76, 0.0200005, 0.25, -5.44, -2.7818, 0.25, -1.02542, -0.975898, 0.65, -4.59771, -2.81791, 0.25, -4.61089, 0.200001, 0.25, -5.8, 8.9, 0.25, -5.8, 8.9, 0.25, -8.8, -0.0999994, 0.25, -8.8, 0.200001, 1.05, -0.4, 0.200001, 1.05, -4.6, -0.0999994, 0.25, -8.8, 0.0200005, 0.25, -5.44, 0.0800009, 1.05, -3.76, 0.1, 0.25, -6, 5, 2.65, -4.6, 5, 2.65, -0.4, 8.9, 2.45, -0.4, 8.9, 2.45, -4.6, 1.7, 0.25, 8.9, 2, 0.25, 0.8, 0.200001, 0.25, 0.8, 0.200001, 0.25, 0.8, 0.200001, 1.05, 0.200001, -8.8, 0.25, 0.200001, 0.200001, 0.25, 0.8, -8.8, 0.25, 0.200001, -8.8, 0.25, 8.9, 1.7, 0.25, 8.9, 8.9, 0.25, 8.9, 8.9, 0.25, 0.8, 2, 0.25, 0.8, 1.7, 0.25, 8.9, 5.3, 5.05, 2.9, 5.3, 5.05, 6.5, 8.3, 5.05, 6.5, 8.3, 5.05, 2.9 )
+polygons = [ PoolIntArray( 3, 2, 0 ), PoolIntArray( 0, 2, 1 ), PoolIntArray( 4, 7, 5 ), PoolIntArray( 5, 7, 6 ), PoolIntArray( 11, 17, 12 ), PoolIntArray( 12, 17, 8 ), PoolIntArray( 8, 15, 9 ), PoolIntArray( 9, 15, 10 ), PoolIntArray( 10, 15, 13 ), PoolIntArray( 13, 16, 14 ), PoolIntArray( 14, 17, 11 ), PoolIntArray( 17, 15, 8 ), PoolIntArray( 15, 16, 13 ), PoolIntArray( 16, 17, 14 ), PoolIntArray( 17, 16, 15 ), PoolIntArray( 19, 18, 20 ), PoolIntArray( 20, 18, 21 ), PoolIntArray( 24, 27, 25 ), PoolIntArray( 25, 27, 23 ), PoolIntArray( 25, 23, 26 ), PoolIntArray( 26, 23, 22 ), PoolIntArray( 31, 30, 28 ), PoolIntArray( 28, 30, 29 ), PoolIntArray( 34, 33, 32 ), PoolIntArray( 37, 36, 35 ), PoolIntArray( 39, 38, 40 ), PoolIntArray( 40, 38, 41 ), PoolIntArray( 43, 42, 44 ), PoolIntArray( 44, 42, 45 ), PoolIntArray( 49, 48, 46 ), PoolIntArray( 46, 48, 47 ) ]
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -46,23 +50,28 @@ environment = SubResource( 2 )
 
 [node name="Geometry" type="Spatial" parent="."]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="Geometry"]
+[node name="Navigation" type="Navigation" parent="Geometry"]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Geometry/Navigation"]
+navmesh = SubResource( 5 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Geometry/Navigation/NavigationMeshInstance"]
 use_collision = true
 
-[node name="CSGPolygon" type="CSGPolygon" parent="Geometry/CSGCombiner"]
+[node name="CSGPolygon" type="CSGPolygon" parent="Geometry/Navigation/NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.589, 0, 0.035 )
 polygon = PoolVector2Array( -3.60503, -0.0159982, 0.395316, 1.22718, 2.92604, 1.21624, 2.94379, 2.25892, 7.91693, 2.18748, 7.91875, -0.0103154 )
 depth = 5.0
 material = ExtResource( 2 )
 
-[node name="CSGBox" type="CSGBox" parent="Geometry/CSGCombiner"]
+[node name="CSGBox" type="CSGBox" parent="Geometry/Navigation/NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 width = 20.0
 height = 5.0
 depth = 20.0
 material = ExtResource( 3 )
 
-[node name="CSGBox2" type="CSGBox" parent="Geometry/CSGCombiner/CSGBox"]
+[node name="CSGBox2" type="CSGBox" parent="Geometry/Navigation/NavigationMeshInstance/CSGCombiner/CSGBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 operation = 2
 width = 19.0
@@ -70,14 +79,14 @@ height = 4.5
 depth = 19.0
 material = ExtResource( 3 )
 
-[node name="CSGBox2" type="CSGBox" parent="Geometry/CSGCombiner"]
+[node name="CSGBox2" type="CSGBox" parent="Geometry/Navigation/NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.779, 3, 1.057 )
 width = 2.34267
 height = 0.38012
 depth = 1.44097
 material = ExtResource( 2 )
 
-[node name="CSGBox3" type="CSGBox" parent="Geometry/CSGCombiner"]
+[node name="CSGBox3" type="CSGBox" parent="Geometry/Navigation/NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78, 4.5, 4.752 )
 width = 3.87614
 height = 0.38012
@@ -129,9 +138,15 @@ move_to = Vector3( 0, 0, 4 )
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 6 )]
 transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 1.14, -0.1485, 4.495 )
+navigation_path = NodePath("../../Geometry/Navigation")
+target_path = NodePath("../../Player")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 6 )]
-transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 6.49, 4.6515, 4.545 )
+transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 6.34, 4.8015, 4.195 )
+navigation_path = NodePath("../../Geometry/Navigation")
+target_path = NodePath("../../Player")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 6 )]
-transform = Transform( 0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, -6.46, 0.451501, 1.445 )
+transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, -6.81, 0.1015, 1.695 )
+navigation_path = NodePath("../../Geometry/Navigation")
+target_path = NodePath("../../Player")

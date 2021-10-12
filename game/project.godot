@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/color-palette/PaletteImporter.gd"
 }, {
+"base": "Spatial",
+"class": "PathFollower",
+"language": "GDScript",
+"path": "res://Entities/Characters/PathFollower.gd"
+}, {
 "base": "BulletEmitter",
 "class": "PelletBulletEmitter",
 "language": "GDScript",
@@ -78,6 +83,11 @@ _global_script_classes=[ {
 "class": "Rocket",
 "language": "GDScript",
 "path": "res://Entities/Weapons/RocketLauncher/Rocket.gd"
+}, {
+"base": "Spatial",
+"class": "Vision",
+"language": "GDScript",
+"path": "res://Entities/Characters/Vision.gd"
 }, {
 "base": "Spatial",
 "class": "Weapon",
@@ -106,9 +116,11 @@ _global_script_class_icons={
 "MuzzleFlash": "",
 "Palette": "",
 "PaletteImporter": "",
+"PathFollower": "",
 "PelletBulletEmitter": "",
 "ProjectileBulletEmitter": "",
 "Rocket": "",
+"Vision": "",
 "Weapon": "",
 "WeaponManager": "",
 "WeaponViewport": ""
@@ -119,6 +131,11 @@ _global_script_class_icons={
 config/name="100 Days of Gamedev"
 run/main_scene="res://Levels/Sanbox.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PathfindManager="*res://Entities/Characters/PathFindManager.tscn"
+DebugDraw="*res://addons/zylann.debug_draw/debug_draw.gd"
 
 [display]
 
@@ -200,7 +217,9 @@ attack={
 [layer_names]
 
 3d_render/layer_1="default"
+3d_physics/layer_1="environment"
 3d_render/layer_2="weapons"
+3d_physics/layer_2="characters"
 
 [physics]
 

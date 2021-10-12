@@ -9,6 +9,9 @@ onready var weapon_manager := $Head/Camera/WeaponManager
 export var mouse_sensitivity := 0.5
 export var head_max_pitch := 90.0
 
+func get_aim_at_position() -> Vector3:
+	return head.global_transform.origin
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

@@ -27,7 +27,7 @@ func dequeue_path_request():
 	var calc_path_info = queue.pop_front()
 	var agent: Node = calc_path_info.agent
 	
-	if not agent:
+	if not is_instance_valid(agent):
 		return
 	
 	var nav: Navigation = calc_path_info.nav

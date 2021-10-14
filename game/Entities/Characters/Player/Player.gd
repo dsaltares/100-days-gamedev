@@ -5,6 +5,7 @@ onready var head := $Head
 onready var headbob_animation := $Head/Camera/HeadBobPlayer
 onready var mover := $CharacterMover
 onready var weapon_manager := $Head/Camera/WeaponManager
+onready var agent := GSAISteeringAgent.new()
 
 export var mouse_sensitivity := 0.5
 export var head_max_pitch := 90.0
@@ -40,6 +41,9 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("attack"):
 		weapon_manager.attack(Input.is_action_just_pressed("attack"))
+		
+func _physics_process(delta: float) -> void:
+	_update_agent()
 
 
 func _input(event: InputEvent) -> void:
@@ -54,6 +58,14 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == BUTTON_WHEEL_UP:
 			weapon_manager.switch_to_prev_weapon()
 
+func _update_agent() -> void:
+	var transform := global_transform
+	var basis := transform.basis
+	agent.position = global_transform.origin
+	agent.orientation = basis.z.angle_to(Vector3.ZERO)
+	agent.linear_velocity = mover.h_velocity
+	agent.angular_velocity = 0.0
+	
 
 func _on_Health_died() -> void:
 	get_tree().reload_current_scene()
